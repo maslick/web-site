@@ -1,0 +1,13 @@
+{
+  "name": "dcdb-tool",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery": "*",
+    "requirejs": "*",
+    "requirejs-text": "*",
+    "requirejs-i18n": "*",
+    "angular": "*",
+    "bootstrap": "*",
+    "keycloak": "*"
+  }
+}

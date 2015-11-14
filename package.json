@@ -1,0 +1,11 @@
+{
+  "name": "dcdb-tool",
+  "version": "0.0.1",
+  "dependencies": {
+    "grunt": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
+    "matchdep": "*"
+  }
+}
