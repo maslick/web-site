@@ -8,6 +8,7 @@
     "requirejs-i18n": "*",
     "angular": "*",
     "bootstrap": "*",
-    "keycloak": "*"
+    "keycloak": "*",
+    "rainbow.js": "*"
   }
 }

@@ -1,0 +1,8 @@
+{
+  "realm": "api-marketplace",
+  "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoJp/CdIsmyo7Zcd172kn1Mjrut9bD0yM0USdYDBmXSvNj83yGIZG/M/ZGElzfCF0hUlTnqn5nMDLdUcGad2frxkK6FYrikiSt15xSdyvQK7Nc9Oo04G9SB8zof1NJSkEgxLu3qapxBG5JhSAcdU8whkUJJTXc2RFlkUXXGnnSSDCGOJLe7KBTffO/6Lc5uLkyStka7UwiIpJQY3au8yqqUVhjM/6HZIs8OBzR0WgSBECq9NrQpfj/LafYF3Oi0N+r21sFY4NgDl6XqMG/DAkaUWm3xsPl+ub6iEKy9mMvOQm/hjonJQSzcgHwT3CcBFrXgdyIX+fimWYoyz20tW3yQIDAQAB",
+  "auth-server-url": "http://apimarket.cloud.si/auth/",
+  "ssl-required": "external",
+  "resource": "api-marketplace-frontend",
+  "public-client": true
+}
