@@ -3,9 +3,12 @@
   "version": "0.0.1",
   "dependencies": {
     "grunt": "*",
+    "connect-livereload": "*",
     "grunt-contrib-less": "*",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
+    "grunt-contrib-connect": "*",
+    "load-grunt-tasks": "*",
     "matchdep": "*"
   }
 }

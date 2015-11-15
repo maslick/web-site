@@ -9,6 +9,9 @@
     "angular": "*",
     "bootstrap": "*",
     "keycloak": "*",
-    "rainbow.js": "*"
+    "rainbow.js": "*",
+    "typopro-web": "*",
+    "fontawesome": "*",
+    "angular-ui-router": "*"
   }
 }
