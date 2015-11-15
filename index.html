@@ -3,12 +3,39 @@
 <html>
 <head>
     <title>DCDB-tool</title>
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
+    <base href="/">
 </head>
-<body>
-    <div id="splash" style="position:absolute;z-index:2000;background:white;top:0;bottom:0;left:0;right:0;"></div>
-    <h1 id="hello">Hello world!</h1>
+<body style="position: relative">
+    <div id="splash">
+        <div>Loading ...</div>
+    </div>
+    <!--<div id="spinner">-->
+        <!--<div id="loading">DCDB-tool <br><i class="fa fa-refresh fa-spin fa-3x"></i></div>-->
+        <!--<div></div>-->
+    <!--</div>-->
+
+
+
+    <!--<h1 id="hello">Hello world!</h1>-->
+
+    <!--<div ng-controller="MyController">-->
+        <!--Hello {{greetMe}}!-->
+    <!--</div>-->
+
+
+
+
+
+    <div ui-view id="container"></div>
+    <a ui-sref="index">index</a>
+    <a ui-sref="state1">State 1</a>
+    <a ui-sref="state2">State 2</a>
 
 </body>
+
+
 
 <script data-main="main/main.js" src="vendor/requirejs/require.js"></script>
 </html>

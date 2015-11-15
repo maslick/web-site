@@ -9,12 +9,16 @@ require.config({
         'keycloak': '../vendor/keycloak/dist/keycloak',
         'bootstrap' : '../vendor/bootstrap/dist/js/bootstrap.min',
         'jsonFormatter': '../vendor/json-formatter/dist/json-formatter',
-        'rainbow': '../vendor/rainbow.js/topbar'
+        'rainbow': '../vendor/rainbow.js/topbar',
+        'angular-ui-router': '../vendor/angular-ui-router/release/angular-ui-router'
     },
     shim: {
         'angular': {
             exports: 'angular',
             deps: ['jquery']
+        },
+        'angular-ui-router': {
+            deps: ['angular']
         },
         'bootstrap': {
             deps:['jquery']
@@ -23,5 +27,7 @@ require.config({
 });
 
 require(['app'], function (App) {
-    App.run();
+    //App.spinner();
+    App.rainbow();
+    App.init();
 });
