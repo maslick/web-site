@@ -1,0 +1,56 @@
+@import "../vendor/typopro-web/web/TypoPRO-BukhariScript/TypoPRO-BukhariScript.css";
+@import "../vendor/bootstrap/dist/css/bootstrap.css";
+
+#splash {
+    position:fixed;
+    width: 100%;
+    height: 100%;
+    background:white;
+    z-index: 2000;
+}
+
+#splash div {
+    position: absolute;
+    width: 100%;
+    top: 35%;
+    left: 0%;
+    text-align: center;
+    font-family: "TypoPRO Bukhari Script";
+    font-weight: normal;
+    font-size: 14pt;
+}
+
+.navbar {
+    border-radius: 0px;
+}
+
+.container-fluid {
+    padding-left: 10px;
+}
+
+.content {
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 70%;
+    padding-top: 50px;
+    left: 0%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page-body {
+    padding-top: 0px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right:10px;
+}
+
+.footer {
+    padding: 5px 18px;
+    /*background: #F8F8F8;*/
+    border-top: 1px solid #e4e5e7;
+    transition: all 0.4s ease 0s;
+    text-align: center;
+    color: #999;
+}
+

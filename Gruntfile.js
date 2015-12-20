@@ -2,9 +2,7 @@ module.exports = function(grunt) {
     // Do grunt-related things in here
     //grunt.loadNpmTasks('grunt-contrib-connect');
 
-
     require('load-grunt-tasks')(grunt);
-
 
     grunt.initConfig({
         connect: {
@@ -18,8 +16,6 @@ module.exports = function(grunt) {
             }
         }
     });
-
-
 
     grunt.registerTask('dev', [
         'connect:server'
