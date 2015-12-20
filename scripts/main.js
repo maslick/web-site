@@ -13,6 +13,7 @@
         'rainbow': '../vendor/rainbow.js/topbar',
         'uiRouter': '../vendor/angular-ui-router/release/angular-ui-router',
         'lodash': '../vendor/lodash/lodash',
+        'dropdown': '../vendor/bootstrap/js/dropdown'
     },
     shim: {
         'angular': {

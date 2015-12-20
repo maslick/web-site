@@ -5,7 +5,7 @@
 define([
     'angular',
     'uiRouter',
-    './controllers/index',
+    './content/index',
     './directives/index',
     './filters/index',
     './services/index'

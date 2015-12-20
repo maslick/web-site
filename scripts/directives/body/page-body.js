@@ -1,6 +1,6 @@
 define([
-    './module',
-    'text!./body/body.html'
+    '../module',
+    'text!./body.html'
 ], function (directives, body) {
     'use strict';
     directives.directive('pageBody', function () {

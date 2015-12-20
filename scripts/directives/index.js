@@ -4,8 +4,7 @@
  * properly referenced in one of the module dependencies in the array.
  **/
 define([
-    './app-version',
-    './page-header',
-    './page-body',
-    './page-footer'
+    './header/page-header',
+    './body/page-body',
+    './footer/page-footer'
 ], function () {});

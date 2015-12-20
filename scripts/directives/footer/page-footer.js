@@ -1,6 +1,6 @@
 define([
-    './module',
-    'text!./footer/footer.html'
+    '../module',
+    'text!./footer.html'
 ], function (directives, footer) {
     'use strict';
     directives.directive('pageFooter', function () {
