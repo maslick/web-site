@@ -12,6 +12,7 @@
     "rainbow.js": "*",
     "typopro-web": "*",
     "fontawesome": "*",
-    "angular-ui-router": "*"
+    "angular-ui-router": "*",
+    "lodash": "*"
   }
 }

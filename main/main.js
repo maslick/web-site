@@ -10,7 +10,8 @@ require.config({
         'bootstrap' : '../vendor/bootstrap/dist/js/bootstrap.min',
         'jsonFormatter': '../vendor/json-formatter/dist/json-formatter',
         'rainbow': '../vendor/rainbow.js/topbar',
-        'angular-ui-router': '../vendor/angular-ui-router/release/angular-ui-router'
+        'angular-ui-router': '../vendor/angular-ui-router/release/angular-ui-router',
+        'lodash': '../vendor/lodash/lodash',
     },
     shim: {
         'angular': {
@@ -27,7 +28,8 @@ require.config({
 });
 
 require(['app'], function (App) {
-    //App.spinner();
+    App.spinner();
     App.rainbow();
-    App.init();
+    //App.authenticate();
+    //App.init();
 });
