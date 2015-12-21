@@ -38,3 +38,5 @@ dist
 scripts/content/layout.css
 vendor
 scripts/config.js.tpl
+
+keycloak.json
