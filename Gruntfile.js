@@ -32,12 +32,29 @@ module.exports = function(grunt) {
                     ".tmp/css/layout.css": "css/layout.less"
                 }
             }
+        },
+        copy: {
+            develop: {
+                files: [
+                    {
+                        expand: true,
+                        flatten: true,
+                        dot: true,
+                        cwd: '.',
+                        dest: '.tmp/css/',
+                        src: [
+                            'vendor/typopro-web/web/TypoPRO-BukhariScript/*.{otf,eot,svg,ttf,woff,woff2}',
+                        ]
+                    }
+                ]
+            }
         }
     });
 
     grunt.registerTask('dev', [
         'clean:temp',
         'less:develop',
+        'copy:develop',
         'connect:server'
     ]);
 };
