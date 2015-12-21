@@ -1,7 +1,4 @@
 module.exports = function(grunt) {
-<<<<<<< HEAD
-    // Do grunt-related things in here
-    //grunt.loadNpmTasks('grunt-contrib-connect');
 
     require('load-grunt-tasks')(grunt);
 
