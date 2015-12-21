@@ -5,6 +5,8 @@
     "grunt": "*",
     "connect-livereload": "*",
     "grunt-contrib-less": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-copy": "*",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
     "grunt-contrib-connect": "*",

@@ -1,17 +1,29 @@
 {
   "name": "dcdb-tool",
   "version": "0.0.1",
+  "main": "index.html",
+  "ignore": [
+    "**/.*",
+    "libs"
+  ],
   "dependencies": {
-    "jquery": "*",
+
     "requirejs": "*",
     "requirejs-text": "*",
     "requirejs-i18n": "*",
-    "angular": "*",
+    "requirejs-domready": "*",
+
+    "jquery": "*",
     "bootstrap": "*",
-    "keycloak": "*",
+
+    "angular": "*",
+    "angular-ui-router": "*",
+
     "rainbow.js": "*",
     "typopro-web": "*",
     "fontawesome": "*",
-    "angular-ui-router": "*"
+
+    "keycloak": "*"
+
   }
 }

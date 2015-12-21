@@ -1,0 +1,8 @@
+{
+  "realm": "hello",
+  "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAspI6jwHgOyskJ5hn8N5EXwBLiaeqAlZ3Tfmk3U7pfj4rxt6zMxwWCOdWgHR66gfjD2Z0lj2F6lJfl2l21z2WsrAjjX4gqxr5WVeh1Fg25lkTJqzK5pcVXVy9qpmOSOuDxr5W1+VeJRmdfhY/fBXX/E1xaTTkUg0w7grhWWjpDmfejp00hinhvdqQroUH6dM25mWBWzFvKuRHpgb3XcE7UBXCQ6Bsh25WLvfWeKZ781Ki5zAlchrd5thpUsFoXbIfx4EGc3HP9LztZRPCjNGSFAdiLD34N0A0w/2PN/sNeKe8W7q8Swr4VnOx0kj7hkt4ukxGCLdxi7+iakA31CxylwIDAQAB",
+  "auth-server-url": "https://auth.maslick.com/auth",
+  "ssl-required": "external",
+  "resource": "frontend",
+  "public-client": true
+}
