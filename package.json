@@ -1,15 +1,17 @@
 {
   "name": "dcdb-tool",
   "version": "0.0.1",
-  "dependencies": {
-    "grunt": "*",
+  "devDependencies": {
     "connect-livereload": "*",
-    "grunt-contrib-less": "*",
+    "grunt": "*",
     "grunt-contrib-clean": "*",
+    "grunt-contrib-connect": "*",
     "grunt-contrib-copy": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-sass": "*",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
-    "grunt-contrib-connect": "*",
+    "grunt-contrib-requirejs": "*",
     "load-grunt-tasks": "*",
     "matchdep": "*"
   }
