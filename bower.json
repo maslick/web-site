@@ -15,6 +15,7 @@
 
     "jquery": "*",
     "bootstrap": "*",
+    "foundation": "zurb/bower-foundation",
 
     "angular": "*",
     "angular-ui-router": "*",

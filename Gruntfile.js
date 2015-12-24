@@ -1,38 +1,24 @@
 module.exports = function(grunt) {
-    require('load-grunt-tasks')(grunt, { pattern: 'grunt-contrib-*'});
-
 
     var paths = {
-        dist: 'dist'
+        tmp: 'target'
     };
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        connect: {
-            server: {
-                options: {
-                    port: '3003',
-                    hostname: '0.0.0.0',
-                    keepalive: true,
-                    open: true,
-                    base: ['.tmp']
-                }
-            }
-        },
+        paths: paths,
         clean: {
             options: {
                 force: true
             },
             temp: {
-                src: ['.tmp']
-            },
-            dist: {
-                src: ['<%= paths.dist %>']
+                src: ['<%= paths.tmp %>']
             }
         },
         copy: {
             develop: {
                 files: [
+                    // fonts
                     {
                         expand: true,
                         flatten: true,
@@ -41,23 +27,25 @@ module.exports = function(grunt) {
                         src: [
                             'vendor/typopro-web/web/TypoPRO-BukhariScript/*.{otf,eot,svg,ttf,woff,woff2}'
                         ],
-                        dest: '.tmp/css/'
+                        dest: '<%= paths.tmp %>/css/'
                     },
+                    // index.html
                     {
                         cwd: '.',
                         src: 'index.html',
-                        dest: '.tmp/'
+                        dest: '<%= paths.tmp %>/'
                     },
+                    // content
                     {
                         cwd: '.',
-                        src: ['scripts/**/*.{html,}'],
-                        dest: '.tmp/'
+                        src: ['scripts/**/*.html'],
+                        dest: '<%= paths.tmp %>/'
                     },
+                    // require.js
                     {
                         cwd: '.',
-                        src: ['vendor/requirejs/**'],
-                        dest: '.tmp/'
-
+                        src: ['vendor/requirejs/require.js'],
+                        dest: '<%= paths.tmp %>/require.js'
                     }
                 ]
             }
@@ -65,17 +53,7 @@ module.exports = function(grunt) {
         less: {
             develop: {
                 files: {
-                    ".tmp/css/layout.css": "css/layout.less"
-                }
-            },
-            dist: {
-                options: {
-                    modifyVars: {
-
-                    }
-                },
-                files: {
-                    ".tmp/css/layout.css": "scripts/content/layout.less"
+                    "<%= paths.tmp %>/css/layout.css": "css/layout.less"
                 }
             }
         },
@@ -92,38 +70,138 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: 'scripts',
                     src: ['**/*.scss'],
-                    dest: paths.dist,
+                    dest: '<%= paths.tmp %>',
                     ext: '.css'
                 }]
             }
         },
         requirejs: {
-            // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
             options: {
                 name: 'main',
                 baseUrl: 'scripts',
                 mainConfigFile: 'scripts/main.js',
-                out: '.tmp/scripts/main.js',
+                out: '<%= paths.tmp %>/scripts/main.js',
                 optimize: 'none',
                 almond: true,
                 preserveLicenseComments: false,
                 useStrict: true,
                 wrap: true,
                 findNestedDependencies: true,
-                paths: {
-                    //config: '../.tmp/scripts/config'
-                }
+                paths: {}
             },
             dist: {}
         },
+        ngAnnotate: {
+            options: {
+                singleQuotes: true
+            },
+            dist: {
+                files: [
+                    {
+                        expand: true,
+                        src: '<%= paths.tmp %>/scripts/main.js',
+                        extDot: 'last'
+                    }
+                ]
+            }
+        },
+        uglify: {
+            options: {
+                compress: {
+                    sequences: false,
+                    dead_code: false,
+                    drop_debugger: false,
+                    comparisons: false,
+                    conditionals: false,
+                    evaluate: false,
+                    booleans: false,
+                    loops: false,
+                    if_return: false,
+                    join_vars: false,
+                    drop_console: false
+                }
+            },
+            requirejs: {
+                files: {
+                    '<%= paths.tmp %>/require.js': ['<%= paths.tmp %>/require.js'],
+                    '<%= paths.tmp %>/scripts/main.js': ['<%= paths.tmp %>/scripts/main.js']
+                }
+            }
+        },
+        htmlmin: {
+            options: {
+                //removeCommentsFromCDATA: true,
+                collapseWhitespace: true
+                //collapseBooleanAttributes: true,
+                //removeAttributeQuotes: true,
+                //removeRedundantAttributes: true,
+                //useShortDoctype: true,
+                //removeEmptyAttributes: true,
+                //removeOptionalTags: true
+            },
+            dist: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= paths.tmp %>',
+                        src: '**/*.html',
+                        dest: '<%= paths.tmp %>'
+                    },
+                    {
+                        expand: true,
+                        cwd: '<%= paths.tmp %>',
+                        src: '**/*.css',
+                        dest: '<%= paths.tmp %>'
+                    }
+                ]
+            }
+        },
+        connect: {
+            server: {
+                options: {
+                    port: '3003',
+                    hostname: '0.0.0.0',
+                    keepalive: true,
+                    open: true,
+                    base: ['<%= paths.tmp %>']
+                }
+            }
+        }
     });
 
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-ng-annotate');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-contrib-connect');
+
+
     grunt.registerTask('dev', [
+        'clean',
         'sass',
-        'clean:temp',
-        'less:develop',
-        'copy:develop',
+        'less',
+        'copy',
         'requirejs',
+        'connect:server'
+    ]);
+
+    grunt.registerTask('prod', [
+        'clean',
+        'sass',
+        'less',
+        'copy',
+        'requirejs',
+        'ngAnnotate',
+        'uglify',
+        'htmlmin',
+        'connect:server'
+    ]);
+
+    grunt.registerTask('serve', [
         'connect:server'
     ]);
 

@@ -12,6 +12,8 @@
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
     "grunt-contrib-requirejs": "*",
+    "grunt-ng-annotate": "*",
+    "grunt-contrib-htmlmin": "*",
     "load-grunt-tasks": "*",
     "matchdep": "*"
   }
