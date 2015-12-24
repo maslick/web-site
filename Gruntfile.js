@@ -1,22 +1,46 @@
 module.exports = function(grunt) {
 
     var paths = {
-        tmp: 'target'
+        dev: 'scripts',
+        prod: 'target'
     };
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         paths: paths,
+        connect: {
+            dev: {
+                options: {
+                    port: '3003',
+                    hostname: '0.0.0.0',
+                    keepalive: true,
+                    open: true,
+                    base: ['.', 'scripts/content', 'vendor/requirejs']
+                }
+            },
+            prod: {
+                options: {
+                    port: '3003',
+                    hostname: '0.0.0.0',
+                    keepalive: true,
+                    open: true,
+                    base: ['<%= paths.prod %>']
+                }
+            }
+        },
         clean: {
             options: {
                 force: true
             },
-            temp: {
-                src: ['<%= paths.tmp %>']
+            dev: {
+                src: ['<%= paths.dev %>/content/css']
+            },
+            prod: {
+                src: ['<%= paths.prod %>']
             }
         },
         copy: {
-            develop: {
+            dev: {
                 files: [
                     // fonts
                     {
@@ -27,34 +51,55 @@ module.exports = function(grunt) {
                         src: [
                             'vendor/typopro-web/web/TypoPRO-BukhariScript/*.{otf,eot,svg,ttf,woff,woff2}'
                         ],
-                        dest: '<%= paths.tmp %>/css/'
+                        dest: '<%= paths.dev %>/content/css/'
+                    }
+                ]
+            },
+            prod: {
+                files: [
+                    // fonts
+                    {
+                        expand: true,
+                        flatten: true,
+                        dot: true,
+                        cwd: '.',
+                        src: [
+                            'vendor/typopro-web/web/TypoPRO-BukhariScript/*.{otf,eot,svg,ttf,woff,woff2}'
+                        ],
+                        dest: '<%= paths.prod %>/css/'
                     },
                     // index.html
                     {
                         cwd: '.',
                         src: 'index.html',
-                        dest: '<%= paths.tmp %>/'
+                        dest: '<%= paths.prod %>/'
                     },
                     // content
                     {
                         cwd: '.',
                         src: ['scripts/**/*.html'],
-                        dest: '<%= paths.tmp %>/'
+                        dest: '<%= paths.prod %>/'
                     },
                     // require.js
                     {
                         cwd: '.',
                         src: ['vendor/requirejs/require.js'],
-                        dest: '<%= paths.tmp %>/require.js'
+                        dest: '<%= paths.prod %>/require.js'
                     }
                 ]
             }
         },
         less: {
-            develop: {
+            dev: {
                 files: {
-                    "<%= paths.tmp %>/css/layout.css": "scripts/content/layout.less",
-                    "<%= paths.tmp %>/css/loading.css": "scripts/content/loading.less"
+                    "<%= paths.dev %>/content/css/layout.css": "scripts/content/layout.less",
+                    "<%= paths.dev %>/content/css/loading.css": "scripts/content/loading.less"
+                }
+            },
+            prod: {
+                files: {
+                    "<%= paths.prod %>/css/layout.css": "scripts/content/layout.less",
+                    "<%= paths.prod %>/css/loading.css": "scripts/content/loading.less"
                 }
             }
         },
@@ -62,7 +107,7 @@ module.exports = function(grunt) {
             options: {
                 loadPath: ['vendor/foundation/scss']
             },
-            dist: {
+            prod: {
                 options: {
                     sourcemap: 'none',
                     style: 'nested'
@@ -71,7 +116,7 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: 'scripts',
                     src: ['**/*.scss'],
-                    dest: '<%= paths.tmp %>',
+                    dest: '<%= paths.prod %>',
                     ext: '.css'
                 }]
             }
@@ -81,7 +126,7 @@ module.exports = function(grunt) {
                 name: 'main',
                 baseUrl: 'scripts',
                 mainConfigFile: 'scripts/main.js',
-                out: '<%= paths.tmp %>/scripts/main.js',
+                out: '<%= paths.prod %>/scripts/main.js',
                 optimize: 'none',
                 almond: true,
                 preserveLicenseComments: false,
@@ -100,7 +145,7 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        src: '<%= paths.tmp %>/scripts/main.js',
+                        src: '<%= paths.prod %>/scripts/main.js',
                         extDot: 'last'
                     }
                 ]
@@ -124,48 +169,30 @@ module.exports = function(grunt) {
             },
             requirejs: {
                 files: {
-                    '<%= paths.tmp %>/require.js': ['<%= paths.tmp %>/require.js'],
-                    '<%= paths.tmp %>/scripts/main.js': ['<%= paths.tmp %>/scripts/main.js']
+                    '<%= paths.prod %>/require.js': ['<%= paths.prod %>/require.js'],
+                    '<%= paths.prod %>/scripts/main.js': ['<%= paths.prod %>/scripts/main.js']
                 }
             }
         },
         htmlmin: {
             options: {
-                //removeCommentsFromCDATA: true,
                 collapseWhitespace: true
-                //collapseBooleanAttributes: true,
-                //removeAttributeQuotes: true,
-                //removeRedundantAttributes: true,
-                //useShortDoctype: true,
-                //removeEmptyAttributes: true,
-                //removeOptionalTags: true
             },
-            dist: {
+            prod: {
                 files: [
                     {
                         expand: true,
-                        cwd: '<%= paths.tmp %>',
+                        cwd: '<%= paths.prod %>',
                         src: '**/*.html',
-                        dest: '<%= paths.tmp %>'
+                        dest: '<%= paths.prod %>'
                     },
                     {
                         expand: true,
-                        cwd: '<%= paths.tmp %>',
+                        cwd: '<%= paths.prod %>',
                         src: '**/*.css',
-                        dest: '<%= paths.tmp %>'
+                        dest: '<%= paths.prod %>'
                     }
                 ]
-            }
-        },
-        connect: {
-            server: {
-                options: {
-                    port: '3003',
-                    hostname: '0.0.0.0',
-                    keepalive: true,
-                    open: true,
-                    base: ['<%= paths.tmp %>']
-                }
             }
         }
     });
@@ -181,29 +208,32 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
 
 
-    grunt.registerTask('dev', [
-        'clean',
+    grunt.registerTask('prod', [
+        'clean:prod',
         'sass',
-        'less',
-        'copy',
+        'less:prod',
+        'copy:prod',
         'requirejs',
-        'connect:server'
+        'connect:prod'
     ]);
 
-    grunt.registerTask('prod', [
-        'clean',
+    grunt.registerTask('prod.min', [
+        'clean:prod',
         'sass',
-        'less',
-        'copy',
+        'less:prod',
+        'copy:prod',
         'requirejs',
         'ngAnnotate',
         'uglify',
         'htmlmin',
-        'connect:server'
+        'connect:prod'
     ]);
 
-    grunt.registerTask('serve', [
-        'connect:server'
+    grunt.registerTask('dev', [
+        'clean:dev',
+        'copy:dev',
+        'less:dev',
+        'connect:dev'
     ]);
 
 };
