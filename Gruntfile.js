@@ -53,7 +53,8 @@ module.exports = function(grunt) {
         less: {
             develop: {
                 files: {
-                    "<%= paths.tmp %>/css/layout.css": "css/layout.less"
+                    "<%= paths.tmp %>/css/layout.css": "scripts/content/layout.less",
+                    "<%= paths.tmp %>/css/loading.css": "scripts/content/loading.less"
                 }
             }
         },
