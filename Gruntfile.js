@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
     var paths = {
         dev: 'scripts',
-        prod: 'target'
+        prod: 'dist'
     };
 
     grunt.initConfig({
@@ -33,7 +33,7 @@ module.exports = function(grunt) {
                 force: true
             },
             dev: {
-                src: ['<%= paths.dev %>/content/css']
+                src: ['<%= paths.dev %>/content/css', '<%= paths.dev %>/content/fonts']
             },
             prod: {
                 src: ['<%= paths.prod %>']
@@ -106,6 +106,19 @@ module.exports = function(grunt) {
         sass: {
             options: {
                 loadPath: ['vendor/foundation/scss']
+            },
+            dev: {
+                options: {
+                    sourcemap: 'none',
+                    style: 'nested'
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'scripts',
+                    src: ['**/*.scss'],
+                    dest: '<%= paths.dev %>/content/css/',
+                    ext: '.css'
+                }]
             },
             prod: {
                 options: {
@@ -233,6 +246,7 @@ module.exports = function(grunt) {
         'clean:dev',
         'copy:dev',
         'less:dev',
+        'sass:dev',
         'connect:dev'
     ]);
 

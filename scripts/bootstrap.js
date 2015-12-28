@@ -16,17 +16,17 @@ define([
      * place operations that need to initialize prior to app start here
      * using the `run` function on the top-level module
      */
-    topbar.show();
+    //topbar.show();
 
     var sleeping = function() {
         $('#splash').fadeOut(300, function() {
             $(this).remove();
         });
-        topbar.hide();
+        //topbar.hide();
     };
 
     require(['domReady!'], function (document) {
         ng.bootstrap(document, ['app']);
-        setTimeout(sleeping, 1000);
+        setTimeout(sleeping, 2000);
     });
 });
