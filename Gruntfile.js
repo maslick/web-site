@@ -5,6 +5,8 @@ module.exports = function(grunt) {
         prod: 'dist'
     };
 
+    var fs = require('fs');
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         paths: paths,
@@ -33,10 +35,21 @@ module.exports = function(grunt) {
                 force: true
             },
             dev: {
-                src: ['<%= paths.dev %>/content/css', '<%= paths.dev %>/content/fonts']
+                src: [
+                    '<%= paths.dev %>/content/css', '<%= paths.dev %>/content/fonts', '<%= paths.dev %>/**/*.css'
+                ]
             },
             prod: {
                 src: ['<%= paths.prod %>']
+            },
+            prod2: {
+                src: ['<%= paths.prod %>/**/*.css', '!<%= paths.prod %>/css/*.css']
+            },
+            empty: {
+                src: ['<%= paths.prod %>/**/*', '<%= paths.prod %>/*'],
+                filter: function (path) {
+                    return grunt.file.isDir(path) && fs.readdirSync(path).length === 0;
+                }
             }
         },
         copy: {
@@ -49,7 +62,7 @@ module.exports = function(grunt) {
                         dot: true,
                         cwd: '.',
                         src: [
-                            'vendor/typopro-web/web/TypoPRO-BukhariScript/*.{otf,eot,svg,ttf,woff,woff2}'
+                            'vendor/typopro-web/web/TypoPRO-BukhariScript/*.woff'
                         ],
                         dest: '<%= paths.dev %>/content/css/'
                     }
@@ -64,7 +77,7 @@ module.exports = function(grunt) {
                         dot: true,
                         cwd: '.',
                         src: [
-                            'vendor/typopro-web/web/TypoPRO-BukhariScript/*.{otf,eot,svg,ttf,woff,woff2}'
+                            'vendor/typopro-web/web/TypoPRO-BukhariScript/*.woff'
                         ],
                         dest: '<%= paths.prod %>/css/'
                     },
@@ -91,16 +104,26 @@ module.exports = function(grunt) {
         },
         less: {
             dev: {
-                files: {
-                    "<%= paths.dev %>/content/css/layout.css": "scripts/content/layout.less",
-                    "<%= paths.dev %>/content/css/loading.css": "scripts/content/loading.less"
-                }
+                files: [
+                    {
+                        expand: true,
+                        cwd: "<%= paths.dev %>",
+                        src: ['**/*.less'],
+                        dest: '<%= paths.dev %>',
+                        ext: '.css'
+                    }
+                ]
             },
             prod: {
-                files: {
-                    "<%= paths.prod %>/css/layout.css": "scripts/content/layout.less",
-                    "<%= paths.prod %>/css/loading.css": "scripts/content/loading.less"
-                }
+                files: [
+                    {
+                        expand: true,
+                        cwd: "<%= paths.dev %>",
+                        src: ['**/*.less'],
+                        dest: '<%= paths.prod %>',
+                        ext: '.css'
+                    }
+                ]
             }
         },
         sass: {
@@ -132,6 +155,19 @@ module.exports = function(grunt) {
                     dest: '<%= paths.prod %>',
                     ext: '.css'
                 }]
+            }
+        },
+        concat: {
+            options: {
+                separator: '\n',
+            },
+            dev: {
+                src: ['<%= paths.dev %>/**/*.css'],
+                dest: '<%= paths.dev %>/content/css/styles.css',
+            },
+            prod: {
+                src: ['<%= paths.prod %>/**/*.css'],
+                dest: '<%= paths.prod %>/css/styles.css',
             }
         },
         requirejs: {
@@ -213,6 +249,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-ng-annotate');
@@ -221,33 +258,40 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
 
 
+
     grunt.registerTask('prod', [
-        'clean:prod',
-        'sass',
-        'less:prod',
-        'copy:prod',
-        'requirejs',
-        'connect:prod'
+        'clean:prod',       // clean dist dir
+        'copy:prod',        // copy content
+        'less:prod',        // generate css files
+        /*'sass',*/
+        'concat:prod',      // concat css files into one
+        'clean:prod2',      // clean unused css files
+        'clean:empty',      // remove empty dirs
+        'requirejs',        // generate require.js
+        'connect:prod'      // start server
     ]);
 
     grunt.registerTask('prod.min', [
-        'clean:prod',
-        'sass',
-        'less:prod',
-        'copy:prod',
-        'requirejs',
-        'ngAnnotate',
-        'uglify',
-        'htmlmin',
-        'connect:prod'
+        'clean:prod',       // clean dist dir
+        'copy:prod',        // copy content
+        'less:prod',        // generate css files
+        /*'sass',*/
+        'concat:prod',      // concat css files into one
+        'clean:prod2',      // clean unused css files
+        'clean:empty',      // remove empty dirs
+        'requirejs',        // generate require.js
+        'ngAnnotate',       // annotate Angular files before uglifying
+        'uglify',           // uglify js files
+        'htmlmin',          // minimize css and html
+        'connect:prod'      // start server
     ]);
 
     grunt.registerTask('dev', [
         'clean:dev',
         'copy:dev',
         'less:dev',
-        'sass:dev',
+        /*'sass:dev',*/
+        'concat:dev',
         'connect:dev'
     ]);
-
 };

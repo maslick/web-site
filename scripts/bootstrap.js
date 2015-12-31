@@ -7,26 +7,30 @@ define([
     'angular',
     'jquery',
     'rainbow',
+    'twitter-bootstrap',
     'app',
-    'routes'
-], function (require, ng, $, topbar) {
+    'routes',
+], function (require, ng, $, rainbow) {
     'use strict';
 
     /*
      * place operations that need to initialize prior to app start here
      * using the `run` function on the top-level module
      */
-    //topbar.show();
+    rainbow.show();
 
     var sleeping = function() {
         $('#splash').fadeOut(300, function() {
             $(this).remove();
         });
-        //topbar.hide();
+        rainbow.hide();
     };
 
     require(['domReady!'], function (document) {
         ng.bootstrap(document, ['app']);
-        setTimeout(sleeping, 2000);
+
+        setTimeout(sleeping, 400);
+        $('.dropdown-toggle').dropdown();
+
     });
 });
