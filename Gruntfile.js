@@ -71,6 +71,16 @@ module.exports = function(grunt) {
                             'vendor/typopro-web/web/TypoPRO-BukhariScript/*.woff'
                         ],
                         dest: '<%= paths.dev %>/content/css/'
+                    },
+                    {
+                        expand: true,
+                        flatten: true,
+                        dot: true,
+                        cwd: '.',
+                        src: [
+                            'libs/fonts/*.{woff,ttf}'
+                        ],
+                        dest: '<%= paths.dev %>/content/css/'
                     }
                 ]
             },
