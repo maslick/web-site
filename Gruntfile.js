@@ -7,13 +7,19 @@ module.exports = function(grunt) {
 
     var fs = require('fs');
 
+    var port = {
+        dev: '3003',
+        prod: '3003'
+    };
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         paths: paths,
+        port: port,
         connect: {
             dev: {
                 options: {
-                    port: '3003',
+                    port: '<%= port.dev %>',
                     hostname: '0.0.0.0',
                     keepalive: true,
                     open: true,
@@ -22,7 +28,7 @@ module.exports = function(grunt) {
             },
             prod: {
                 options: {
-                    port: '3003',
+                    port: '<%= port.prod %>',
                     hostname: '0.0.0.0',
                     keepalive: true,
                     open: true,
