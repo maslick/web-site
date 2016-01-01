@@ -1,7 +1,4 @@
-<!--<div class="jumbotron" id="jumbo">
-    <div class="text-center"></div>
-</div>-->
-
+<!--
 <div class="topthing">
 
 </div>
@@ -13,5 +10,15 @@
     <p>In pellentesque lacus at mi vestibulum ultrices. Sed vehicula, tortor vitae interdum finibus, eros velit feugiat massa, et viverra magna ex in ligula. Donec vitae sem porta purus feugiat ultricies ac sit amet nibh. Maecenas efficitur ut sapien nec feugiat. Curabitur et nunc a dolor efficitur dictum. Curabitur ligula nisi, varius elementum quam eu, congue suscipit magna. Praesent neque urna, pretium nec lacus ut, malesuada condimentum urna. Sed vitae sodales urna, quis malesuada lorem. In mattis purus ut finibus volutpat. Cras at finibus nisi, ultrices lobortis enim. Ut non arcu mi. Suspendisse convallis porttitor felis, id fringilla diam.</p>
     <p>Aenean fringilla magna ut lectus ullamcorper mollis. Fusce viverra arcu sed ex cursus, vel placerat dolor vestibulum. Aliquam ac nulla a est condimentum faucibus sed in felis. Vivamus malesuada, nisl nec interdum iaculis, tellus nulla volutpat justo, vel fringilla nisi est vitae ante. Curabitur vitae hendrerit nunc, ac condimentum tellus. Ut id nisl ut mi aliquet faucibus. Morbi efficitur massa id lectus viverra facilisis.</p>
 </div>
+-->
 
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
+<div class="container">
+    <div ng-repeat="thumb in thumbs" class="row text-center">
+        <div ng-repeat="img in thumb" class="col-md-4">
+            <img ng-src="img/thumbs/{{img}}" class="img-responsive img-thumbnail">
+        </div>
+    </div>
+</div>
