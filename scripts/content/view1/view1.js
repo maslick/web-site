@@ -3,12 +3,7 @@ define(['../module'], function (controllers) {
     controllers.controller('MyCtrl1', ['$scope',function ($scope) {
         $scope.text = "hello world!";
 
-        function shuffle(o){
-            for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-            return o;
-        }
-
-        var array = [
+        var array_orig = [
             'gorenje.jpg',
             'gorenje1.jpg',
             'gorenje2.jpg',
@@ -25,15 +20,25 @@ define(['../module'], function (controllers) {
             'wiha.jpg'
         ];
 
-        array = shuffle(array);
-        $scope.thumbs = [];
-
-        var i,j,temparray,chunk = 3;
-        for (i=0,j=array.length; i<j; i+=chunk) {
-            temparray = array.slice(i,i+chunk);
-            $scope.thumbs.push(temparray);
+        function shuffle(o){
+            for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+            return o;
         }
 
+        function makeArray (array) {
+            $scope.thumbs = [];
+            var i,j,temparray,chunk = 3;
+            for (i=0,j=array.length; i<j; i+=chunk) {
+                temparray = array.slice(i,i+chunk);
+                $scope.thumbs.push(temparray);
+            }
+        }
+
+        $scope.btn_sort = function() {
+            makeArray(shuffle(array_orig));
+        }
+
+        makeArray(shuffle(array_orig));
 
     }]);
 });

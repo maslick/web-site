@@ -1,7 +1,6 @@
 define([
     '../module',
-    'text!./header.html',
-    'dropdown'
+    'text!./header.html'
 ], function (directives, header) {
     'use strict';
     directives.directive('pageHeader', function () {
