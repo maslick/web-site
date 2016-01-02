@@ -13,7 +13,7 @@
 -->
 
 <div class="topthing text-center">
-    <p>Shuffle pictures:</p>
+    <p>Shuffle pictures?</p>
     <p>
         <a class="btn btn-info" ng-click="btn_sort()">shuffle</a>
     </p>
@@ -24,7 +24,7 @@
 <div class="container">
    <div ng-repeat="thumb in thumbs" class="row text-center">
         <div ng-repeat="img in thumb" class="col-sm-4">
-            <a href="#view1"><img ng-src="img/thumbs/{{img}}" class="img-responsive img-thumbnail"></a>
+            <a><img ng-src="img/thumbs/{{img}}" class="img-responsive img-thumbnail"></a>
         </div>
     </div>
 </div>

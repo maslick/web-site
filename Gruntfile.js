@@ -97,6 +97,16 @@ module.exports = function(grunt) {
                         ],
                         dest: '<%= paths.prod %>/css/'
                     },
+                    {
+                        expand: true,
+                        flatten: true,
+                        dot: true,
+                        cwd: '.',
+                        src: [
+                            'libs/fonts/*.{woff,ttf}'
+                        ],
+                        dest: '<%= paths.prod %>/css/'
+                    },
                     // index.html
                     {
                         cwd: '.',
@@ -107,6 +117,11 @@ module.exports = function(grunt) {
                     {
                         cwd: '.',
                         src: ['scripts/**/*.html'],
+                        dest: '<%= paths.prod %>/'
+                    },
+                    {
+                        cwd: '.',
+                        src: ['img/**'],
                         dest: '<%= paths.prod %>/'
                     },
                     // require.js
