@@ -1,30 +1,18 @@
-<!--
+
+
 <div class="topthing">
-
-</div>
-
-<div class="container-fluid text-justify">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at lacus sed leo sagittis porttitor. Duis laoreet faucibus lorem, sed dignissim massa facilisis iaculis. Proin bibendum tortor non tortor varius sollicitudin. Aliquam erat volutpat. Fusce nec est id neque aliquam ullamcorper. Nam in consequat velit. Quisque aliquet, leo ut rutrum maximus, diam risus dapibus enim, id dignissim mauris est non ante. Fusce ut sem et quam efficitur suscipit nec eget ante. Fusce tincidunt nisl justo, at placerat nunc accumsan et. Nam id quam nec nulla sodales sodales at quis nisl. Pellentesque bibendum augue lorem, vel semper dolor lacinia ut. Suspendisse sagittis, tortor ac scelerisque tempor, lorem est molestie mi, at tincidunt eros est non arcu. Vivamus eu dolor ut nisi blandit aliquam. Vestibulum bibendum ornare ipsum, et finibus libero rhoncus quis.</p>
-    <p>Aliquam mollis, arcu quis eleifend hendrerit, sapien ipsum lobortis ante, a tempor libero dui eu turpis. Vivamus ac nulla sit amet metus ornare pretium vehicula ut elit. Nulla nec molestie mauris. Integer at eros dignissim, dictum nisl sit amet, viverra risus. Curabitur eget nulla a magna iaculis lacinia ut et tellus. Suspendisse pretium gravida pharetra. Fusce convallis tortor ipsum, non porttitor nisi sagittis eget.</p>
-    <p>Maecenas at nunc vel lectus condimentum pretium ut vitae massa. Duis mollis, sapien ut semper vehicula, ligula nisl molestie turpis, eget ultrices magna odio porttitor ante. Fusce posuere mattis dolor, et ullamcorper mauris faucibus at. Donec nec hendrerit nisl, a volutpat nisi. Ut sit amet vehicula arcu. Vestibulum non magna magna. Nunc bibendum gravida erat. Cras et nunc nisi. Pellentesque augue odio, elementum eu justo id, hendrerit suscipit augue. Vestibulum at orci molestie, volutpat turpis ut, rutrum neque. Nullam facilisis maximus nunc id tristique. Aenean rutrum viverra semper.</p>
-    <p>In pellentesque lacus at mi vestibulum ultrices. Sed vehicula, tortor vitae interdum finibus, eros velit feugiat massa, et viverra magna ex in ligula. Donec vitae sem porta purus feugiat ultricies ac sit amet nibh. Maecenas efficitur ut sapien nec feugiat. Curabitur et nunc a dolor efficitur dictum. Curabitur ligula nisi, varius elementum quam eu, congue suscipit magna. Praesent neque urna, pretium nec lacus ut, malesuada condimentum urna. Sed vitae sodales urna, quis malesuada lorem. In mattis purus ut finibus volutpat. Cras at finibus nisi, ultrices lobortis enim. Ut non arcu mi. Suspendisse convallis porttitor felis, id fringilla diam.</p>
-    <p>Aenean fringilla magna ut lectus ullamcorper mollis. Fusce viverra arcu sed ex cursus, vel placerat dolor vestibulum. Aliquam ac nulla a est condimentum faucibus sed in felis. Vivamus malesuada, nisl nec interdum iaculis, tellus nulla volutpat justo, vel fringilla nisi est vitae ante. Curabitur vitae hendrerit nunc, ac condimentum tellus. Ut id nisl ut mi aliquet faucibus. Morbi efficitur massa id lectus viverra facilisis.</p>
-</div>
--->
-
-<div class="topthing text-center">
-    <p>Shuffle pictures?</p>
-    <p>
-        <a class="btn btn-info" ng-click="btn_sort()">shuffle</a>
+    <h2 class="text-center">Portfolio</h2>
+    <p class="text-center">Shuffle pictures?</p>
+    <p class="text-center">
+        <a class="btn btn-info" ng-click="btn_sort()">Okay</a>
     </p>
-
 </div>
 
 
-<div class="container">
+<div class="container" style="padding-top: 20px;">
    <div ng-repeat="thumb in thumbs" class="row text-center">
         <div ng-repeat="img in thumb" class="col-sm-4">
-            <a><img ng-src="img/thumbs/{{img}}" class="img-responsive img-thumbnail"></a>
+                <a><img ng-src="img/thumbs/{{img}}" class="img-responsive img-thumbnail"></a>
         </div>
     </div>
 </div>

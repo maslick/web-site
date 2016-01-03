@@ -3,7 +3,7 @@ define(['../module'], function (controllers) {
     controllers.controller('MyCtrl1', ['$scope',function ($scope) {
         $scope.text = "hello world!";
 
-        var array_orig = [
+        var files = [
             'gorenje.jpg',
             'gorenje1.jpg',
             'gorenje2.jpg',
@@ -35,10 +35,10 @@ define(['../module'], function (controllers) {
         }
 
         $scope.btn_sort = function() {
-            makeArray(shuffle(array_orig));
+            makeArray(shuffle(files));
         }
 
-        makeArray(shuffle(array_orig));
+        makeArray(shuffle(files));
 
     }]);
 });
