@@ -7,24 +7,22 @@
     "libs"
   ],
   "dependencies": {
-
     "requirejs": "*",
     "requirejs-text": "*",
     "requirejs-i18n": "*",
     "requirejs-domready": "*",
-
     "jquery": "*",
     "bootstrap": "*",
     "foundation": "zurb/bower-foundation",
-
     "angular": "*",
     "angular-ui-router": "*",
-
     "rainbow.js": "*",
     "typopro-web": "*",
     "fontawesome": "*",
-
-    "keycloak": "*"
-
+    "keycloak": "*",
+    "jquery-ui": "*",
+    "normalize-css": "*",
+    "classie": "*",
+    "modernizr": "*"
   }
 }

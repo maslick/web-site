@@ -4,6 +4,7 @@
     paths: {
         'domReady': '../vendor/requirejs-domready/domReady',
         'jquery': '../vendor/jquery/dist/jquery',
+        'jquery-ui': '../vendor/jquery-ui/jquery-ui',
         'i18n': '../vendor/requirejs-i18n/i18n',
         'text': '../vendor/requirejs-text/text',
         'angular': '../vendor/angular/angular',
@@ -13,7 +14,9 @@
         'rainbow': '../vendor/rainbow.js/topbar',
         'uiRouter': '../vendor/angular-ui-router/release/angular-ui-router',
         'lodash': '../vendor/lodash/lodash',
-        'dropdown': '../vendor/bootstrap/js/dropdown'
+        'dropdown': '../vendor/bootstrap/js/dropdown',
+        'classie': '../vendor/classie/classie',
+        'modernizr': '../vendor/modernizr/modernizr'
     },
     shim: {
         'angular': {
@@ -25,6 +28,9 @@
         },
         'twitter-bootstrap': {
             deps:['jquery']
+        },
+        'jquery-ui': {
+            deps: ['jquery']
         }
     },
     deps: [
