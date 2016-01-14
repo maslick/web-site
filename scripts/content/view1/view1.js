@@ -1,7 +1,10 @@
 define(['../module'], function (controllers) {
     'use strict';
+
     controllers.controller('MyCtrl1', ['$scope',function ($scope) {
         $scope.text = "hello world!";
+        var infiniteScrollCalled = false;
+        var infiniteScrollEnabled = true;
 
         var files = [
             'gorenje.jpg',
@@ -17,6 +20,7 @@ define(['../module'], function (controllers) {
             'termos2.jpg',
             'termos3.jpg',
             'turnigy.jpg',
+            'wiha.jpg',
             'wiha.jpg'
         ];
 
@@ -25,20 +29,43 @@ define(['../module'], function (controllers) {
             return o;
         }
 
-        function makeArray (array) {
-            $scope.thumbs = [];
-            var i,j,temparray,chunk = 3;
-            for (i=0,j=array.length; i<j; i+=chunk) {
-                temparray = array.slice(i,i+chunk);
-                $scope.thumbs.push(temparray);
+        function makeArrayChuncked(arrayin, chuck_size) {
+            var resarray = [];
+            var i,j,temparray;
+            for (i=0,j=arrayin.length; i<j; i+=chuck_size) {
+                temparray = arrayin.slice(i,i+chuck_size);
+                resarray.push(temparray);
             }
+            return resarray;
         }
+
 
         $scope.btn_sort = function() {
-            makeArray(shuffle(files));
+            $scope.shuffled = shuffle($scope.shuffled);
+            $scope.thumbs = makeArrayChuncked($scope.shuffled, 3);
         }
 
-        makeArray(shuffle(files));
+
+        $scope.pagingFunction = function() {
+            if(!infiniteScrollCalled && infiniteScrollEnabled) {
+                //infiniteScrollCalled = true;
+                getMorePics();
+                //infiniteScrollCalled = false;
+            }
+        };
+
+        var getMorePics = function() {
+            if ($scope.thumbs.length > 30) return;
+            var array = shuffle(files).slice(0,5);
+
+            $scope.shuffled = $scope.shuffled.concat(array);
+            $scope.thumbs = makeArrayChuncked($scope.shuffled, 3);
+
+        }
+
+        // ACTION
+        $scope.shuffled = shuffle(files);
+        $scope.thumbs = makeArrayChuncked($scope.shuffled, 3);
 
     }]);
 });

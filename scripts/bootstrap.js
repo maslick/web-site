@@ -9,7 +9,7 @@ define([
     'rainbow',
     'twitter-bootstrap',
     'app',
-    'routes',
+    'routes'
 ], function (require, ng, $, rainbow) {
     'use strict';
 

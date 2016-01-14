@@ -16,7 +16,8 @@
         'lodash': '../vendor/lodash/lodash',
         'dropdown': '../vendor/bootstrap/js/dropdown',
         'classie': '../vendor/classie/classie',
-        'modernizr': '../vendor/modernizr/modernizr'
+        'modernizr': '../vendor/modernizr/modernizr',
+        'angular-infinite-scroll': '../vendor/ngInfiniteScroll/build/ng-infinite-scroll'
     },
     shim: {
         'angular': {
@@ -31,6 +32,9 @@
         },
         'jquery-ui': {
             deps: ['jquery']
+        },
+        'angular-infinite-scroll': {
+            deps: ['angular','jquery']
         }
     },
     deps: [

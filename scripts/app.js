@@ -5,6 +5,7 @@
 define([
     'angular',
     'uiRouter',
+    'angular-infinite-scroll',
     './content/index',
     './directives/index',
     './filters/index',
@@ -12,11 +13,16 @@ define([
 ], function (ng) {
     'use strict';
 
-    return ng.module('app', [
+    var application = ng.module('app', [
         'app.services',
         'app.controllers',
         'app.filters',
         'app.directives',
-        'ui.router'
+        'ui.router',
+        'infinite-scroll'
     ]);
+
+    ng.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 250);
+
+    return application;
 });

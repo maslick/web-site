@@ -9,9 +9,9 @@
 </div>
 
 
-<div class="container" style="padding-top: 20px;">
+<div class="container" style="padding-top: 20px;" infinite-scroll="pagingFunction()" infinite-scroll-distance="0">
    <div ng-repeat="thumb in thumbs" class="row text-center">
-        <div ng-repeat="img in thumb" class="col-sm-4">
+        <div ng-repeat="img in thumb track by $index" class="col-sm-4" >
                 <a><img ng-src="img/thumbs/{{img}}" class="img-responsive img-thumbnail"></a>
         </div>
     </div>

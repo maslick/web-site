@@ -23,6 +23,7 @@
     "jquery-ui": "*",
     "normalize-css": "*",
     "classie": "*",
-    "modernizr": "*"
+    "modernizr": "*",
+    "ngInfiniteScroll": "*"
   }
 }
