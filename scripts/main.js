@@ -17,7 +17,9 @@
         'dropdown': '../vendor/bootstrap/js/dropdown',
         'classie': '../vendor/classie/classie',
         'modernizr': '../vendor/modernizr/modernizr',
-        'angular-infinite-scroll': '../vendor/ngInfiniteScroll/build/ng-infinite-scroll'
+        'angular-infinite-scroll': '../vendor/ngInfiniteScroll/build/ng-infinite-scroll',
+        'angular-ui-ace': '../vendor/angular-ui-ace/ui-ace',
+        'ace-builds': '../vendor/ace-builds/src/ace'
     },
     shim: {
         'angular': {
@@ -35,6 +37,9 @@
         },
         'angular-infinite-scroll': {
             deps: ['angular','jquery']
+        },
+        'angular-ui-ace': {
+            deps: ['angular', 'ace-builds']
         }
     },
     deps: [

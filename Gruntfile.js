@@ -269,7 +269,7 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         cwd: '<%= paths.prod %>',
-                        src: '**/*.css',
+                        src: 'css/*.css',
                         dest: '<%= paths.prod %>'
                     }
                 ]
