@@ -22,6 +22,11 @@ define(['./app'], function(app) {
                 url: '/view2',
                 templateUrl: 'scripts/content/view2/view2.html',
                 controller: 'MyCtrl2'
+            })
+            .state('view3',{
+                url: '/view3',
+                templateUrl: 'scripts/content/view3/view3.html',
+                controller: 'MyCtrl3'
             });
 
         $urlRouterProvider.otherwise('/');

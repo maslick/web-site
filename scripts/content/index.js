@@ -7,5 +7,6 @@
 define([
     './view0/view0',
     './view1/view1',
-    './view2/view2'
+    './view2/view2',
+    './view3/view3'
 ], function () {});

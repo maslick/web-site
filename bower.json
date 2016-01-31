@@ -25,6 +25,7 @@
     "classie": "*",
     "modernizr": "*",
     "ngInfiniteScroll": "*",
-    "angular-ui-ace": "*"
+    "angular-ui-ace": "*",
+    "d3": "*"
   }
 }

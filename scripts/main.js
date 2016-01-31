@@ -19,7 +19,8 @@
         'modernizr': '../vendor/modernizr/modernizr',
         'angular-infinite-scroll': '../vendor/ngInfiniteScroll/build/ng-infinite-scroll',
         'angular-ui-ace': '../vendor/angular-ui-ace/ui-ace',
-        'ace-builds': '../vendor/ace-builds/src/ace'
+        'ace-builds': '../vendor/ace-builds/src/ace',
+        'd3': '../vendor/d3/d3'
     },
     shim: {
         'angular': {

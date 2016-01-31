@@ -313,7 +313,7 @@ module.exports = function(grunt) {
         'requirejs',        // generate require.js
         'ngAnnotate',       // annotate Angular files before uglifying
         'uglify',           // uglify js files
-        'htmlmin',          // minimize css and html
+        /*'htmlmin',*/          // minimize css and html
         'connect:prod'      // start server
     ]);
 

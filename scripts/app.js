@@ -7,6 +7,7 @@ define([
     'uiRouter',
     'angular-infinite-scroll',
     'angular-ui-ace',
+    'd3',
     './content/index',
     './directives/index',
     './filters/index',
