@@ -1,39 +1,9 @@
-define(['../module', 'jquery', './data'], function (controllers, $) {
+define(['../module', 'jquery', './data2'], function (controllers, $) {
     'use strict';
     controllers.controller('MyCtrl3', ['$scope', '$http', function ($scope, $http) {
 
-        var parseWSDLstructure = function(obj){
-            var node = {};
-            // object
-            if (obj.hasOwnProperty('childElements')) {
-                node.name = obj.name;
-                node.children = parseWSDLstructure(obj.childElements);
-                return node;
-            }
-            // array
-            else {
-                var arr = [];
-
-                for (var i = 0; i < obj.length; i++) {
-                    node = {};
-                    if (obj[i].type == "COMPLEX") {
-                        node.name = obj[i].name;
-                        node.children = parseWSDLstructure(obj[i].complexType.childElements);
-                        arr.push(node);
-                    }
-                    else if (obj[i].type == "SIMPLE") {
-                        node.name = obj[i].name;
-                        arr.push(node);
-                    }
-                }
-                return arr;
-            }
-        };
-
         function update(source) {
-            /*d3.select("svg")
-                .attr("width", 500);*/
-            var duration = d3.event && d3.event.altKey ? 2000 : 500;
+            var duration = d3.event && d3.event.altKey ? 1000 : 500;
 
             // Compute the new tree layout.
             var nodes = tree.nodes(root).reverse();
@@ -46,7 +16,7 @@ define(['../module', 'jquery', './data'], function (controllers, $) {
                 .data(nodes, function(d) { return d.id || (d.id = ++i); });
 
             // Enter any new nodes at the parent's previous position.
-            var nodeEnter = node.enter().append("svg:g")
+            var nodeEnter = node.enter().append("g")
                 .attr("class", "node")
                 .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
                 .on("click", function(d) { toggle(d); update(d); });
@@ -136,41 +106,57 @@ define(['../module', 'jquery', './data'], function (controllers, $) {
             }
         }
 
-        var m = [0, 0, 0, 220],
-            w = 1000 - m[1] - m[3],
-            h = 400 - m[0] - m[2],
-            i = 0,
-            root;
-
-        var tree = d3.layout.tree()
-            .size([h, w]);
-
-        var diagonal = d3.svg.diagonal()
-            .projection(function(d) { return [d.y, d.x]; });
-
-        var vis = d3.select("#body")
-            .append("svg:svg")
-            .attr("width", w + m[1] + m[3])
-            .attr("height", h + m[0] + m[2])
-            .append("svg:g")
-            .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
-
-
-        root = parseWSDLstructure(m2);
-        root.x0 = h / 2;
-        root.y0 = 0;
         function toggleAll(d) {
             if (d.children) {
                 d.children.forEach(toggleAll);
                 toggle(d);
             }
         }
+
+        function zoom() {
+            vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        }
+
+        /*****************************
+            MAIN job starts here
+        ******************************/
+        var margin = {top: -5, right: -5, bottom: -5, left: 150},
+            width = $("#graph").outerWidth() - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom,
+            i = 0,
+            root;
+
+        var tree = d3.layout.tree()
+            .size([height, width]);
+
+        var diagonal = d3.svg.diagonal()
+            .projection(function(d) { return [d.y, d.x]; });
+
+        var vis = d3.select("#graph").append("svg")
+                .attr("width", "100%")
+                .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                .call(d3.behavior.zoom().scaleExtent([0.3, 1]).on("zoom", zoom))
+            .append("g");
+
+
+        vis.append("rect")
+            .attr("class", "overlay")
+            .attr("fill", "transparent")
+            .attr("width", width)
+            .attr("height", height);
+
+
+
+
+
+        root = m2;
+        root.children.push({"name": "haha1", children: [{"name": "haha2"}]});
+        root.x0 = height / 2;
+        root.y0 = 0;
         root.children.forEach(toggleAll);
-
-
         update(root);
-
-        root.children.forEach(toggleAll);
 
     }]);
 });
