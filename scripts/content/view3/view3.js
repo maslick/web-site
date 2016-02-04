@@ -2,59 +2,33 @@ define(['../module', 'jquery', './data'], function (controllers, $) {
     'use strict';
     controllers.controller('MyCtrl3', ['$scope', '$http', function ($scope, $http) {
 
-        $scope.editor = {
-            useWrapMode: true,
-            theme:'dawn',
-            mode: 'xml',
-            onLoad: function (_ace) {
-                _ace.setShowPrintMargin(false);
-                _ace.getSession().setUseWrapMode(false);
-                _ace.$blockScrolling = Infinity;
-            },
-            advanced: {
-                fontSize: 18
+        var parseWSDLstructure = function(obj){
+            var node = {};
+            // object
+            if (obj.hasOwnProperty('childElements')) {
+                node.name = obj.name;
+                node.children = parseWSDLstructure(obj.childElements);
+                return node;
+            }
+            // array
+            else {
+                var arr = [];
+
+                for (var i = 0; i < obj.length; i++) {
+                    node = {};
+                    if (obj[i].type == "COMPLEX") {
+                        node.name = obj[i].name;
+                        node.children = parseWSDLstructure(obj[i].complexType.childElements);
+                        arr.push(node);
+                    }
+                    else if (obj[i].type == "SIMPLE") {
+                        node.name = obj[i].name;
+                        arr.push(node);
+                    }
+                }
+                return arr;
             }
         };
-
-        $scope.send = function () {
-            $scope.message = "";
-        };
-
-        var m = [0, 0, 0, 120],
-            w = 1000 - m[1] - m[3],
-            h = 400 - m[0] - m[2],
-            i = 0,
-            root;
-
-        var tree = d3.layout.tree()
-            .size([h, w]);
-
-        var diagonal = d3.svg.diagonal()
-            .projection(function(d) { return [d.y, d.x]; });
-
-        var vis = d3.select("#body")
-            .append("svg:svg")
-            .attr("width", w + m[1] + m[3])
-            .attr("height", h + m[0] + m[2])
-            .append("svg:g")
-            .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
-
-
-        root = haha;
-        root.x0 = h / 2;
-        root.y0 = 0;
-        function toggleAll(d) {
-            if (d.children) {
-                d.children.forEach(toggleAll);
-                toggle(d);
-            }
-        }
-        root.children.forEach(toggleAll);
-
-
-        update(root);
-
-
 
         function update(source) {
             /*d3.select("svg")
@@ -82,8 +56,8 @@ define(['../module', 'jquery', './data'], function (controllers, $) {
                 .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
             nodeEnter.append("svg:text")
-                .attr("x", function(d) { return d.children || d._children ? 30 : 10; })
-                .attr("y", function(d) { return d.children || d._children ? -15 : 0; })
+                .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+                .attr("y", function(d) { return d.children || d._children ? 0 : 0; })
                 .attr("dy", ".35em")
                 .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
                 .text(function(d) { return d.name; })
@@ -162,9 +136,41 @@ define(['../module', 'jquery', './data'], function (controllers, $) {
             }
         }
 
+        var m = [0, 0, 0, 220],
+            w = 1000 - m[1] - m[3],
+            h = 400 - m[0] - m[2],
+            i = 0,
+            root;
+
+        var tree = d3.layout.tree()
+            .size([h, w]);
+
+        var diagonal = d3.svg.diagonal()
+            .projection(function(d) { return [d.y, d.x]; });
+
+        var vis = d3.select("#body")
+            .append("svg:svg")
+            .attr("width", w + m[1] + m[3])
+            .attr("height", h + m[0] + m[2])
+            .append("svg:g")
+            .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
 
+        root = parseWSDLstructure(m2);
+        root.x0 = h / 2;
+        root.y0 = 0;
+        function toggleAll(d) {
+            if (d.children) {
+                d.children.forEach(toggleAll);
+                toggle(d);
+            }
+        }
+        root.children.forEach(toggleAll);
 
+
+        update(root);
+
+        root.children.forEach(toggleAll);
 
     }]);
 });
