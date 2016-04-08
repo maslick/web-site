@@ -6,8 +6,6 @@ define([
     'angular',
     'uiRouter',
     'angular-infinite-scroll',
-    'angular-ui-ace',
-    'd3',
     './content/index',
     './directives/index',
     './filters/index',
@@ -22,7 +20,6 @@ define([
         'app.directives',
         'ui.router',
         'infinite-scroll',
-        'ui.ace'
     ]);
 
     ng.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 250);
